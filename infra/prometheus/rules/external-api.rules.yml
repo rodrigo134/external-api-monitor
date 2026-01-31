@@ -1,0 +1,20 @@
+groups:
+  - name: external-api-latency
+    rules:
+      - record: external_api_latency_p95
+        expr: |
+          histogram_quantile(
+            0.95,
+            sum by (le) (
+              rate(external_api_latency_seconds_bucket[5m])
+            )
+          )
+
+      - record: external_api_latency_p99
+        expr: |
+          histogram_quantile(
+            0.99,
+            sum by (le) (
+              rate(external_api_latency_seconds_bucket[5m])
+            )
+          )

@@ -23,7 +23,7 @@ public class MonitorService {
         this.restTemplate = restTemplate;
         this.timer = Timer.builder("external.api.latency")
                 .description("Tempo de resposta de API externa")
-                .publishPercentiles(0.95,0.99)
+                .publishPercentileHistogram()
                 .register(meterRegistry);
     }
 
